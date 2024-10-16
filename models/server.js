@@ -22,12 +22,12 @@ class Server {
     await mongoconnection();
   }
 
-  /*routesM() {
-    this.app.use(this.pathsMongo.genero, require("../routes/Genero"));
-    this.app.use(this.pathsMongo.artista, require("../routes/Artista"));
-    this.app.use(this.pathsMongo.cancion, require("../routes/Cancion"));
+  routesM() {
+    //this.app.use(this.pathsMongo.genero, require("../routes/Genero"));
+    //this.app.use(this.pathsMongo.artista, require("../routes/Artista"));
+    this.app.use(this.pathsMongo.cancion, require("../routes/cancion"));
     
-  }*/
+  }
 
 
   listen() {
