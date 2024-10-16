@@ -1,5 +1,5 @@
-const { Cancion} = require("../models/cancion");
-const { Genero} = require("../models/genero");
+const  Cancion = require("../models/cancion");
+const  Genero = require("../models/genero");
 const { response } = require("express");
 
 const obtenerTodosCanciones = async (req, res = response) => {

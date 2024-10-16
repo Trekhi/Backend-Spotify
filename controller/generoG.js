@@ -1,22 +1,22 @@
-const { Genero } = require("../models");
+const  Genero  = require("../models/genero");
+const { response } = require("express");
 
 const obtenerGenero = async (req, res = response) => {
-    const { limite = 5, desde = 0 } = req.query;
-    //const query = { estado: true };
-  
-    try {
-      const [total, Genero] = await Promise.all([
-        Genero.countDocuments(),
-        Genero.find({})
-          .skip(Number(desde))
-          .sort({nombre:1})
-          //.limit(Number(limite)),
-      ]);
-  
-      res.json({ Ok: true, total: total, resp: heroes });
-    } catch (error) {
-      res.json({ Ok: false, resp: error });
-    }
-  };
+  const { desde = 0 } = req.query;
 
-  module.exports={obtenerGenero}
+  try {
+    const [total, generos] = await Promise.all([
+      Genero.countDocuments(),
+      Genero.find({})
+        .skip(Number(desde))
+        .sort({ nombre: 1 }) // Ordenamos por nombre alfabéticamente
+    ]);
+
+    res.json({ Ok: true, total: total, resp: generos });
+  } catch (error) {
+    console.error("Error al obtener los generos:", error);
+    res.status(500).json({ Ok: false, resp: error.message });
+  }
+};
+
+module.exports = { obtenerGenero };

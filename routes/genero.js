@@ -1,11 +1,11 @@
 const { Router } = require("express");
 
 const {
-  
-} = require("../controller/cancionC");
+    obtenerGenero
+} = require("../controller/generoG");
 
 const router = Router();
 
-router.get('/',)
+router.get('/',obtenerGenero)
 
 module.exports = router;

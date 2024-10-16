@@ -10,7 +10,8 @@ class Server {
     this.pathsMongo = {
       genero: "/Genero",
       artista: "/Artista",
-      cancion: "/Cancion"
+      cancion: "/Cancion",
+      favorito: "/Favorito"
     };
 
     this.mongoconnection();
@@ -23,9 +24,10 @@ class Server {
   }
 
   routesM() {
-    //this.app.use(this.pathsMongo.genero, require("../routes/Genero"));
-    //this.app.use(this.pathsMongo.artista, require("../routes/Artista"));
+    this.app.use(this.pathsMongo.genero, require("../routes/Genero"));
+    this.app.use(this.pathsMongo.artista, require("../routes/Artista"));
     this.app.use(this.pathsMongo.cancion, require("../routes/cancion"));
+    this.app.use(this.pathsMongo.favorito, require("../routes/favorito"));
     
   }
 
