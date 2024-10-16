@@ -10,7 +10,7 @@ const router = Router();
 
 router.get('/',obtenerFavorito)
 router.get('/favoritos/:titulo',agregarfavorito)
-router.delete('favoritos/:titulo',eliminarFavorito)
+router.delete('/eliminar/:titulo',eliminarFavorito)
 
 
 module.exports = router;

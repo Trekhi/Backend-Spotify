@@ -1,4 +1,5 @@
 const  Favorito  = require("../models/favorito");
+const  Cancion  = require("../models/cancion");
 const { response } = require("express");
 
 const obtenerFavorito = async (req, res = response) => {
@@ -19,26 +20,36 @@ const obtenerFavorito = async (req, res = response) => {
   }
 };
 
-const agregarfavorito = async (req, res= response) => {
+const agregarfavorito = async (req, res = response) => {
   const { titulo } = req.params;
+
   try {
-    const cancion = await Favorito.findOne({ titulo })
-    .populate("artista", "nombre nacionalidad")
-    .populate("genero", "nombre");
+    const cancion = await Cancion.findOne({ titulo })
+
+    console.log(cancion)
 
     if (!cancion) {
-      return res.status(400).json({ error: "cancion no encontrada" });
+      return res.status(400).json({ error: "Canción no encontrada" });
     }
 
-    const nuevaCancion = new Favorito(cancion);
+    const nuevaCancion = new Favorito({
+      titulo: cancion.titulo,
+      url: cancion.url,
+      descripcion: cancion.descripcion,
+      artista: cancion.artista,
+      genero: cancion.genero,
+      imagen: cancion.imagen
+    });
+
     await nuevaCancion.save();
 
     res.json({ data: nuevaCancion });
   } catch (error) {
-    console.error("Error en agregar cancion:", error);
+    console.error("Error en agregar canción:", error);
     res.status(500).json({ error: "Error interno del servidor" });
   }
 };
+
 
 
   const eliminarFavorito = async (req, res) => {

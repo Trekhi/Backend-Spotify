@@ -2,7 +2,6 @@ const mongoose = require("mongoose");
 
 const favoritoSchema = new mongoose.Schema({
     titulo: { type: String, required: true },
-    duracion: { type: Number, required: true }, // duración en segundos
     url: { type: String, required: true },
     descripcion: { type: String, required: true }, // URL para la canción
     artista: {
@@ -15,6 +14,7 @@ const favoritoSchema = new mongoose.Schema({
       ref: "Genero",
       required: true,
     },
+    imagen: { type: String, required: true },
   });
   
   const Favorito = mongoose.model("Favorito", favoritoSchema);
