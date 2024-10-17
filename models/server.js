@@ -25,7 +25,7 @@ class Server {
 
   routesM() {
     this.app.use(this.pathsMongo.genero, require("../routes/Genero"));
-    this.app.use(this.pathsMongo.artista, require("../routes/Artista"));
+    this.app.use(this.pathsMongo.artista, require("../routes/artista"));
     this.app.use(this.pathsMongo.cancion, require("../routes/cancion"));
     this.app.use(this.pathsMongo.favorito, require("../routes/favorito"));
     

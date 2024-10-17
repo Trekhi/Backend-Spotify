@@ -1,5 +1,6 @@
 const  Cancion = require("../models/cancion");
 const  Genero = require("../models/genero");
+const Artista = require("../models/artista")
 const { response } = require("express");
 
 const obtenerTodosCanciones = async (req, res = response) => {
@@ -71,5 +72,36 @@ const cancionGenero = async (req, res = response) => {
   }
 };
 
+const cancionArtista = async (req, res = response) => {
+  const { artista } = req.params;
 
-module.exports = { cancionTitulo, obtenerTodosCanciones, cancionGenero };
+  try {
+    const artistaEncontrado = await Artista.findOne({ nombre: artista });
+    
+    if (!artistaEncontrado) {
+      return res.status(404).json({ ok: false, resp: "Artista no encontrado" });
+    }
+
+    const canciones = await Cancion.find({ artista: artistaEncontrado._id })
+      .populate("artista", "nombre nacionalidad") 
+      .populate("genero", "nombre"); 
+
+    if (canciones.length === 0) {
+      return res.status(404).json({ ok: false, resp: "No se encontraron canciones con este artista" });
+    }
+
+    return res.status(200).json({
+      ok: true,
+      canciones,
+    });
+  } catch (error) {
+    console.error("Error al buscar las canciones con ese artista:", error);
+    return res.status(500).json({
+      ok: false,
+      resp: "Error al buscar las canciones, inténtalo de nuevo",
+    });
+  }
+};
+
+
+module.exports = { cancionTitulo, obtenerTodosCanciones, cancionGenero, cancionArtista };
