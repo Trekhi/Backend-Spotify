@@ -11,6 +11,11 @@ const AlbumSchema = new mongoose.Schema({
     ref: "Artista", 
     required: true,
   },
+  genero: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "Genero", 
+    required: true,
+  },
   canciones: [
     {
       type: mongoose.Schema.Types.ObjectId,
