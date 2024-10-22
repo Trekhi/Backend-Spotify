@@ -1,4 +1,5 @@
 const express = require("express"); // levanta servicio de express
+const cors = require('cors')
 
 const mongoconnection = require("../database/connection");
 
@@ -16,6 +17,8 @@ class Server {
     };
 
     this.mongoconnection();
+    this.app.use(cors());
+
     //Routes
     this.routesM();
   }
