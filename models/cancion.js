@@ -14,7 +14,13 @@ const cancionSchema = new mongoose.Schema({
     ref: "Genero",
     required: true,
   },
-  imagen: { type: String, required: true }, 
+  album: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "Album",
+    required: true,
+  },
+  imagen: { type: String, required: true },
+  duracion: { type: String, required: true }, 
 }); 
 
 const Cancion = mongoose.model("Cancion", cancionSchema);
