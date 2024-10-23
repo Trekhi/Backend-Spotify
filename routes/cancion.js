@@ -1,7 +1,8 @@
 const { Router } = require("express");
 
 const {
-    cancionTitulo, 
+    cancionTitulo,
+    obtenerCancionPorId,
     obtenerTodosCanciones, 
     cancionGenero,
     cancionArtista
@@ -10,6 +11,7 @@ const {
 const router = Router();
 
 router.get('/',obtenerTodosCanciones)
+router.get('/:id',obtenerCancionPorId)
 router.get('/titulo/:titulo',cancionTitulo)
 router.get('/canciongenero/:genero',cancionGenero)
 router.get('/cancionArtista/:artista', cancionArtista)

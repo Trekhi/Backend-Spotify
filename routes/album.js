@@ -5,6 +5,7 @@ const router = Router();
 
 const {
     obtenerAlbulmes,
+    obtenerAlbumPorId,
     albumTitulo,
     albumsPorNombreGenero,
     albumsPorNombreArtista
@@ -12,7 +13,8 @@ const {
 ;
 
 router.get('/',obtenerAlbulmes)
-router.get('/albumTiulo/:titulo' , albumTitulo)
+router.get('/:id',obtenerAlbumPorId)
+router.get('/albumTitulo/:titulo' , albumTitulo)
 router.get('/albumGenero/:genero' , albumsPorNombreGenero)
 router.get('/albumArtista/:artista' , albumsPorNombreArtista)
 

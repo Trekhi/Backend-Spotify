@@ -22,6 +22,25 @@ const obtenerAlbulmes = async (req, res = response) => {
   }
 };
 
+const obtenerAlbumPorId = async (req, res = response) => {
+  const { id } = req.params;
+
+  try {
+    const album = await Album.findById(id)
+      .populate("artista", "nombre nacionalidad")
+      .populate("genero", "nombre");
+
+    if (!album) {
+      return res.status(404).json({ Ok: false, resp: "Álbum no encontrado" });
+    }
+
+    res.json({ Ok: true, album: album });
+  } catch (error) {
+    console.error("Error al obtener álbum:", error);
+    res.status(500).json({ Ok: false, resp: error.message });
+  }
+};
+
 const albumTitulo = async (req, res = response) => {
   const { titulo } = req.params;
 
@@ -116,4 +135,4 @@ const albumsPorNombreArtista = async (req, res = response) => {
 
 
 
-module.exports = { obtenerAlbulmes, albumTitulo, albumsPorNombreGenero, albumsPorNombreArtista };
+module.exports = { obtenerAlbulmes, obtenerAlbumPorId, albumTitulo, albumsPorNombreGenero, albumsPorNombreArtista };

@@ -15,6 +15,23 @@ const obtenerTodosCanciones = async (req, res = response) => {
   }
 };
 
+const obtenerCancionPorId = async (req, res = response) => {
+  const { id } = req.params;
+
+  try {
+    const cancion = await Cancion.findById(id);
+
+    if (!cancion) {
+      return res.status(404).json({ Ok: false, resp: "Canción no encontrada" });
+    }
+
+    res.json({ Ok: true, cancion: cancion });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ Ok: false, resp: error.message });
+  }
+};
+
 const cancionTitulo = async (req, res = response) => {
   const { titulo } = req.params;
 
@@ -104,4 +121,4 @@ const cancionArtista = async (req, res = response) => {
 };
 
 
-module.exports = { cancionTitulo, obtenerTodosCanciones, cancionGenero, cancionArtista };
+module.exports = { cancionTitulo, obtenerCancionPorId,obtenerTodosCanciones, cancionGenero, cancionArtista };
